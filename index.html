@@ -58,7 +58,7 @@
             color: #ffffff;
         }
 
-        input {
+        textarea {
             width: calc(100% - 20px);
             padding: 10px;
             margin-bottom: 20px;
@@ -66,6 +66,7 @@
             border-radius: 5px;
             background-color: #2e2e2e;
             color: #ffffff;
+            resize: vertical; /* Allow vertical resizing */
         }
 
         button {
@@ -87,11 +88,19 @@
 
     <form id="messageForm">
         <label for="message">Say something nub:</label>
-        <input type="text" id="message" name="message" required>
+        <textarea id="message" name="message" rows="5" required onkeydown="handleKeyDown(event)"></textarea>
         <button type="button" onclick="submitMessage()">Submit</button>
     </form>
 
     <script>
+        function handleKeyDown(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();  // Prevent the default form submission behavior
+                var input = document.getElementById("message");
+                input.value += '\n';  // Insert a newline character
+            }
+        }
+
         function submitMessage() {
             var message = document.getElementById("message").value;
             var webhookUrl = 'https://discord.com/api/webhooks/1195018002840703116/3o_y5SheHDyH8ewD3ZF8NjbVOLAfsgxeHfIcCkGhZ3Lz8ho_ijX-kU9ooT5Yo3T6cp5H';
