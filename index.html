@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ball dep zai</title>
+    <title>Anh Hùng</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -103,6 +103,11 @@
 
         function submitMessage() {
             var message = document.getElementById("message").value;
+            
+            // Regular expression to find and replace @{discord ID} with mentions
+            var mentionRegex = /@{(\d+)}/g;
+            message = message.replace(mentionRegex, '<@$1>');
+
             var webhookUrl = 'https://discord.com/api/webhooks/1195018002840703116/3o_y5SheHDyH8ewD3ZF8NjbVOLAfsgxeHfIcCkGhZ3Lz8ho_ijX-kU9ooT5Yo3T6cp5H';
             var payload = {
                 content: message
